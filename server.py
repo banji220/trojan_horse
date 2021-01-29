@@ -1,11 +1,10 @@
 import socket 
 
-HOST = "172.17.0.1"
+HOST = "192.168.0.9"
 PORT = 5000
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
-
 server.listen()
 
 client, address = server.accept()
